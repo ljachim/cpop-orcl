@@ -1,0 +1,20 @@
+create or replace type t_graf as object (
+  i number,
+  d date
+);
+
+create or replace type t_nt_grafsales as table of t_graf;
+
+create or replace type t_topfive as object (
+  product varchar2(255),
+  orders  number,
+  visits  number,
+  idproduct number,
+  productid varchar2(255)
+);
+
+create or replace type t_nt_topfive as table of t_topfive;
+
+
+
+select * from table(elsearch.cp_webservices_in_pkg.grafsales_tab(41,'01-01-01','12-12-2013',NULL)); 

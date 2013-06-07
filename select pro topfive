@@ -1,0 +1,14 @@
+select ords.*, p2.price*ords.orders as revenue from 
+(select p.description as product, 
+      count(cp.id_sale) as orders,
+      'xxx' as visits,
+      p.id_product
+  from cp_product p, 
+       cp_sale_product cp,
+       selection_product sp
+    where cp.id_product = p.id_product
+      and sp.productid  = p.productid
+      and sp.id_selection = 21
+     group by p.description, p.id_product 
+     order by orders) ords, cp_product p2
+      where p2.id_product = ords.id_product;
